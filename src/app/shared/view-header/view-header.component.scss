@@ -1,0 +1,40 @@
+.side-bar {
+  width: 60px;
+  height: 100vh;
+  background: #262839;
+  position: fixed;
+  ul {
+    li{
+      padding: 7px;
+      a{
+        svg{
+          path{
+            fill:#ddd;
+          }
+        }
+        &.menu-icons{
+          display: flex;
+          justify-content: center;
+          padding: 7px;
+        }
+        &.menu-icons{
+          &.active {
+            background-color: #E44A19;
+            border-radius: 5px;
+          }
+        }
+        &.logo{
+          svg {
+            g:first-child{
+              fill: #E44A19;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+.top-menu {
+  margin-left: 60px;
+}

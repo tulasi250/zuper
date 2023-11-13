@@ -1,0 +1,8 @@
+<nav class="wraper-component">
+  <ol class="list-reset py-4 pl-4 rounded flex bg-grey-light text-grey">
+    <!-- <li class="px-2"><a class="no-underline text-indigo" (click)="naviation('/dashboard')">Dashboard</a></li>
+    <li *ngIf="isDashboard">/</li> -->
+    <li class="px-2"><a class="no-underline text-indigo" (click)="naviation(this.pageUrl)">{{pageName ? pageName : ''}}</a></li>
+    <li class="totalcount text-white" *ngIf="totalCount !== 0">{{ totalCount ? totalCount : 0}}</li>
+  </ol>
+</nav>

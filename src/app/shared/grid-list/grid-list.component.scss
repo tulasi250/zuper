@@ -1,0 +1,62 @@
+
+.split-page {
+  outline: 3px;
+  margin: 5px;
+}
+.searchlist {
+  min-width: 620px !important;
+  height: 280px !important;
+}
+
+.searchlist table,
+.searchlist table tr th,
+.searchlist table tr td {
+  padding: 0px;
+}
+
+.dx-datagrid .dx-data-row > td.bullet {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.dx-datagrid .dx-row > tr > td {
+  padding: 0px !important;
+}
+
+.dx-datagrid .dx-row > td {
+  padding: 1px 5px !important;
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+.org-title {
+  margin: 0;
+  font-size: 13px !important;
+  color: var(--primary);
+}
+
+:host ::ng-deep .card {
+  .card-body {
+    padding: 0 15px;
+  }
+}
+
+:host ::ng-deep .dx-datagrid {
+  .dx-toolbar-after {
+    margin-right: 5px;
+    margin-top: 5px;
+
+    .dx-button-content {
+      padding: 5px 6px;
+      border-radius: 3px;
+      color: var(--hover-text);
+      background-color: var(--btn);
+      .dx-icon-export {
+        color: var(--hover-text);
+      }
+      .dx-icon-spindown {
+        color: var(--hover-text);
+      }
+    }
+  }
+}

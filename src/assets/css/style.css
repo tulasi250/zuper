@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.wraper-component {
+  margin-left: 60px;
+}
+.justify-end {
+  justify-content: end;
+}

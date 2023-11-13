@@ -1,0 +1,116 @@
+
+<div class="row">
+  <div class="col-lg-12 px-0">
+    <div class="main-card card">
+      <div class="card-body">
+        <dx-data-grid
+          id="gridContainer"
+          [dataSource]="customStore"
+          [allowColumnReordering]="true"
+          [allowColumnResizing]="true"
+          [columnAutoWidth]="true"
+          [showBorders]="true"
+          [rowAlternationEnabled]="true"
+          [showColumnLines]="true"
+          [showRowLines]="false"
+          [filterValue]="filterValue"
+          (onCellPrepared)="onCellPrepared($event)"
+          (onExporting)="onExporting($event)"
+          [remoteOperations]="false"
+          #dataGrid>
+          <dxo-load-panel [enabled]="false"></dxo-load-panel>
+          <dxo-export [enabled]="true" [formats]="['pdf']"></dxo-export>
+          <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+          <dxo-paging [pageSize]="5"></dxo-paging>
+          <dxo-pager
+            [visible]="true"
+            [allowedPageSizes]="[5, 10, 15, 20,50,100]"
+            [displayMode]="displayMode"
+            [showPageSizeSelector]="true"
+            [showInfo]="true"
+            [showNavigationButtons]="true"></dxo-pager>
+          <!--end pagination-->
+          <dxo-filter-builder [customOperations]="customOperations"> </dxo-filter-builder>
+          <dxo-filter-builder-popup [position]="popupPosition"> </dxo-filter-builder-popup>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <ng-container *ngFor="let column of columns; let i = index">
+            <ng-container *ngIf="column.hide !== true">
+              <ng-container *ngIf="column.link; else noLink">
+                <dxi-column
+                  [dataField]="column.columnDef"
+                  [caption]="column.header"
+                  [allowFiltering]="column.filter"
+                  cellTemplate="cellTemplate"></dxi-column>
+              </ng-container>
+              <ng-template #noLink>
+                <ng-container *ngIf="column.icon; else noIcon">
+                  <dxi-column
+                    [dataField]="column.columnDef"
+                    [caption]="column.header"
+                    [allowFiltering]="column.filter"
+                    cellTemplate="iconTemplate"></dxi-column>
+                </ng-container>
+              </ng-template>
+              <ng-template #noIcon>
+                <ng-container *ngIf="column.dateFormat; else noDate">
+                  <dxi-column
+                    *ngIf="column.dateFormat === 'MDY'"
+                    [dataField]="column.columnDef"
+                    [caption]="column.header"
+                    [allowFiltering]="column.filter"
+                    dataType="datetime"
+                    format="MM/dd/yyyy">
+                  </dxi-column>
+                  <dxi-column
+                    *ngIf="column.dateFormat !== 'MDY'"
+                    [dataField]="column.columnDef"
+                    [caption]="column.header"
+                    [allowFiltering]="column.filter"
+                    dataType="datetime"
+                    format="MM/dd/yyyy, hh:mm a"></dxi-column>
+                </ng-container>
+              </ng-template>
+              <ng-template #noDate>
+                <dxi-column [dataField]="column?.columnDef" [caption]="column?.header" [allowFiltering]="column?.filter">
+                </dxi-column>
+              </ng-template>
+            </ng-container>
+          </ng-container>
+          <ng-container
+          *ngIf="
+            updateGrid &&
+            (updateGrid?.edit ||
+              updateGrid?.delete)
+          ">
+          <dxi-column
+            [width]="100"
+            [allowFiltering]="false"
+            [allowSorting]="false"
+            caption="Action"
+            cellTemplate="editCellTemplate"></dxi-column>
+          <div *dxTemplate="let d of 'editCellTemplate'">
+            <a
+              href="javascript:void(0)"
+              *ngIf="updateGrid?.edit"
+              class="no-bg mr-2"
+              matTooltip="Edit"
+              (click)="editData(d)">
+              <em class="fa fa-pencil" aria-hidden="true"><span class="sr-only">Edit</span></em>
+              <span class="sr-only">View</span>
+            </a>
+            <a
+              href="javascript:void(0)"
+              *ngIf="updateGrid?.delete"
+              class="no-bg"
+              matTooltip="Delete"
+              (click)="deleteData(d)">
+              <em class="fa fa-trash" aria-hidden="true"></em>
+            </a>
+          </div>
+        </ng-container>
+      </dx-data-grid>
+      </div>
+    </div>
+  </div>
+</div>
